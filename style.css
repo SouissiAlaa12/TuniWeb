@@ -1,0 +1,7 @@
+.nav{
+    background-color:currentColor;
+    display: flex;
+    justify-content: space-around;
+  
+}
+

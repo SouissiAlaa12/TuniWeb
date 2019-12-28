@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TuniWeb</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+
+</head>
+<style>
+body{
+  background-image:url("bg1.jpg");
+  background-size:cover;
+     background-attachment:fixed;
+
+}
+.navbar{
+  background: #0267C1;
+  padding:20px;
+}
+.btt{
+  font-family: Trebuchet MS, sans-serif;
+  font-size:20px;
+  transition-duration: .4;
+}
+.btt:hover{
+  
+  background-color:slateblue;
+  margin-top:-4px ; 
+}
+
+p{
+font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size:40px;
+color:aliceblue;
+margin-top:20%;
+
+}
+.btn{
+  display: flex;
+  margin:auto;
+  height: 50px;
+ 
+}
+.bnn:hover{
+        margin-top:-3px;
+        
+}
+.bnn{
+  transition-duration: .4s;
+
+}
+.txt{
+  color:rgb(250, 248, 248); 
+  border-radius: 5px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+
+
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light " style=" box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.46);">
+        <a class="navbar-brand" href="#" style="color: white; font-family:Carter One ; font-size:50px;  text-shadow: 2px 2px 4px #000000;display:flex;margin:auto;" >TuniWeb</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+     
+      </nav>
+
+      <div class="container">
+        <div class="col-xs-12"></div>
+        <p class="text-center txt">Here you can find the Top E-Commercial Platforms in Tunisia.</p>
+        <div class="input-group-prepend" id="button-addon3">
+       <a id="u-reg" class="bnn col-sm-6 " href="register.html" > <button type="button" class="btn btn-primary"style="background-color:#0984e3;color:white;border:none; box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);">Register</button> </a>
+      <a id="u-sign" class="bnn col-sm-6 " href="sign.html" > <button type="button" class="btn btn-primary" style="background-color:#0984e3;color:white;border:none; box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);">Sign In</button></a>
+        </div>
+      
+      </div>
+                  
+       
+        <script>
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyDFhnjxH-QCkHFAPXA4C1b_qrvzH9WbOVY",
+                authDomain: "souissi-1.firebaseapp.com",
+                databaseURL: "https://souissi-1.firebaseio.com",
+                projectId: "souissi-1",
+                storageBucket: "souissi-1.appspot.com",
+                messagingSenderId: "87413069201",
+                appId: "1:87413069201:web:9b425b32e68c67d963b630",
+                measurementId: "G-DQ1BRLZN1M"
+            };
+
+            $(document).ready(function () {
+                    firebase.initializeApp(firebaseConfig);
+                    let auth = firebase.auth()
+                $('#u-reg').click(() => {
+                    console.log()
+                    if (auth.currentUser) {
+                        window.location.href = "rank.html";
+                        return false; 
+                    }
+                    
+                })
+
+                $('#u-sign').click(() => {
+                    if (auth.currentUser) {
+                        window.location.href = "rank.html";
+                        return false;
+                    }
+                })
+            })
+        
+        </script>
+</body>
+</html>

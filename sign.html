@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>TuniWeb</title>
+                <link rel="stylesheet" href="style.css">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+              
+            
+           
+</head>
+<style>
+body{
+  background-image:url("bg2.jpg");
+  background-size:cover;
+     background-attachment:fixed;
+}
+.card{
+  display: flex;
+  margin:auto;
+}
+.btt{
+  display: flex;
+  margin:auto;
+  box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);
+
+}
+.form-group{
+  margin-top:10%;
+  margin:20px;
+}
+.bt{
+  display: flex;
+  margin:auto;
+  margin-top:10%;
+  box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);
+}
+.ff{
+    margin-top:20%;
+}
+#u-error {
+    background-color :#F8D7DA;
+    color: #721C24;
+    border-radius: 3px;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    margin-bottom: 12px;
+    display: none;
+}
+</style>
+<body>
+          
+        <p class="h1" style="text-align: center;margin-top:5%;color:aliceblue;text-shadow: 2px 2px 4px #000000;">SIGN IN<p>    
+          <div class="card" style="width: 25rem;height: 33rem;background-color:antiquewhite;box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.75);">
+            <div class="card-body">
+              <button type="button" class="btn btn-primary btt">Click Here to Sign In</button>
+              <div class="form-group ff" style="display:none;">
+                <div id="u-error"></div>
+                <label for="u-email">Email address</label>
+                <input type="email" class="form-control" id="u-email" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">Don't have an account?<a href="register.html">Join</a></small>
+                <label for="u-pass">Password</label>
+                <input type="password" class="form-control" id="u-pass">
+                <!--test-->
+                <div class="form-check" >
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                    <a href="#" data-target="#pwdModal" data-toggle="modal" style="margin-left:7%">Forgot my password</a>
+                
+                </div>
+
+              
+                
+                <!--modal-->
+                <div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="text-center" >What's My Password?</h1>
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                         
+                      </div>
+                      <div class="modal-body">
+                          <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="text-center">
+                                          
+                                          <p>If you have forgotten your password you can reset it here.</p>
+                                            <div class="panel-body">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <input  class="form-control input-lg" placeholder="E-mail Address" name="email" type="email">
+                                                    </div>
+                                                    <input class="btn btn-lg btn-primary btn-block" value="Send My Password" type="submit">
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="modal-footer">
+                          <div class="col-md-12">
+                          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                      </div>	
+                      </div>
+                  </div>
+                  </div>
+                </div>
+                <!--test-->
+                
+                <a id="u-login"><button type="button" class="btn btn-primary bt">Submit</button></a>
+              </div>
+            </div>
+          </div>
+            
+                   
+</body>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDFhnjxH-QCkHFAPXA4C1b_qrvzH9WbOVY",
+        authDomain: "souissi-1.firebaseapp.com",
+        databaseURL: "https://souissi-1.firebaseio.com",
+        projectId: "souissi-1",
+        storageBucket: "souissi-1.appspot.com",
+        messagingSenderId: "87413069201",
+        appId: "1:87413069201:web:9b425b32e68c67d963b630",
+        measurementId: "G-DQ1BRLZN1M"
+    };
+    
+
+$(document).ready(function(){
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth()
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location.href = "rank.html"
+        }
+        
+    });
+    let showedError = false
+
+    let showError = (err) => {
+        document.getElementById('u-error').innerHTML = err
+        if (!showedError) {$('#u-error').fadeIn(100)}
+        showedError = true
+    }
+    $("#u-login").click(async () => {
+        $("#u-email").removeClass('is-invalid')
+        $("#u-pass").removeClass('is-invalid')
+        let fail = false
+        for (let x of ['u-email', 'u-pass']) {
+            if (document.getElementById("u-email").value.length < 1) {
+                $("#" + x).addClass('is-invalid')
+                fail = true
+            }
+        }
+        if (fail) {return}
+
+        let email = document.getElementById("u-email").value
+        let pass = document.getElementById("u-pass").value
+        console.log("loggin")
+        let err = await auth.signInWithEmailAndPassword(email, pass).catch((err) => {
+            return err
+        })
+        if (err) {
+            if (err.code == "auth/invalid-email") {
+                showError('Invalid Email')
+                $("#u-email").addClass('is-invalid')
+            } else if (err.code == "auth/user-not-found") {
+                showError('No user with that email')
+                $("#u-email").addClass('is-invalid')
+            } else if (err.code == "auth/wrong-password") {
+                showError('Incorrect Password')
+                $("#u-pass").addClass('is-invalid')
+            }
+        }
+        console.log(err)
+        return false;
+    })
+  $(".btt").click(function(){
+    $(".ff").fadeIn("slow");
+  });
+  $(".btt").click(function(){
+    $(this).fadeOut("3000");
+  });
+
+});
+</script>
+</html>

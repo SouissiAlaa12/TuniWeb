@@ -1,0 +1,16 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d project"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://SouissiAlaa12.github.io/Tuniweb",
+  "dependencies": {
+    "gh-pages": "^2.1.1"
+  }
+}

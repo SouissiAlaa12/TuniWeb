@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>TuniWeb</title>
+                <link rel="stylesheet" href="style.css">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+
+              
+            
+           
+</head>
+<style>
+body{
+    background-image:url("bg2.jpg");
+    background-size:cover;
+     background-attachment:fixed;
+}
+.card{
+  display: flex;
+  margin:auto;
+}
+.btt{
+  display: flex;
+  margin:auto;
+  box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);
+
+}
+.form-group{
+  margin-top:10%;
+  margin:20px;
+}
+.bt{
+  display: flex;
+  margin:auto;
+  margin-top:10%;
+  box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);
+}
+
+#u-button {
+    border-radius: 3px;
+    background-color: #721C24;
+    text-align: center;
+    margin: auto;
+    width: 150px;
+    padding: 8px 0 ;
+    color: white;
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+
+</style>
+<body>
+  <div id="u-alert" class="alert alert-success succ" role="alert" style="margin-top: 5%;;width: 22rem;margin-left:38%;display:none; box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);">
+    <h4 id="u-reg-response-1" class="alert-heading">Well done!</h4>
+    <p id="u-reg-response-2">Your registration was done successfully ! </p>
+    <div id="u-button">
+        Go back
+
+    </div>
+    <a id="u-nav" href="sign.html"><button type="button" class="btn btn-success" style="display:flex;margin:auto;  box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.36);">Sign In</button></a>
+  </div>
+
+        <p class="h1" style="text-align: center;margin-top:5%;color:aliceblue;text-shadow: 2px 2px 4px #000000;">REGISTER NOW<p>    
+          <div class="card" style="width: 25rem;height: 33rem;background-color:antiquewhite;box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.75);">
+            <div class="card-body form">
+              <button type="button" class="btn btn-primary btt">Click Here to Register</button>
+              <div class="form-group ff" style="display:none;">
+                
+                <label for="u-name">Name</label>
+                <input type="text" class="form-control name" id="u-name" >
+                <span id="error"></span>
+                <label for=u-email>Email address</label>
+                <input type="email" class="form-control" id="u-email" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="u-pass">Password</label>
+                <input type="password" class="form-control" id="u-pass">
+                <label for="u-phone">Phone Number</label>
+                <input type="number" class="form-control" id="u-phone"min="0" >
+                <button type="submit" class="btn btn-primary bt">Register</button>
+                <small id="emailHelp" class="form-text text-muted">You already have an account?<a href="sign.html">Sign in</a></small>
+              </div>
+            </div>
+          </div>
+            
+     
+                   
+</body>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDFhnjxH-QCkHFAPXA4C1b_qrvzH9WbOVY",
+        authDomain: "souissi-1.firebaseapp.com",
+        databaseURL: "https://souissi-1.firebaseio.com",
+        projectId: "souissi-1",
+        storageBucket: "souissi-1.appspot.com",
+        messagingSenderId: "87413069201",
+        appId: "1:87413069201:web:9b425b32e68c67d963b630",
+        measurementId: "G-DQ1BRLZN1M"
+    };
+    
+    
+    
+$(document).ready(function(){
+    firebase.initializeApp(firebaseConfig);
+    let first = true
+    firebase.auth().onAuthStateChanged(function (user) {
+        first = false
+        if (user && first) {
+            window.location.href = "rank.html"
+        }
+
+    });
+
+    $(".btt").click(function(){
+        $(".ff").fadeIn("slow");
+    });
+
+    $('#u-button').click(() => {
+        $(".card").fadeIn("slow");
+        $(".h1").fadeIn("slow");
+        $(".succ").fadeOut("slow");
+    })
+
+    $(".btt").click(function(){
+        $(this).fadeOut("3000");
+    });
+
+    $(".bt").click(function(){
+        //$(".card").fadeOut("slow");
+        //$(".h1").fadeOut("slow");
+        //$(".succ").fadeIn("slow");
+    
+    });
+    let nextCard = () => {
+        $(".card").fadeOut("slow");
+        $(".h1").fadeOut("slow");
+        $(".succ").fadeIn("slow");
+    }
+    $(".bt").click(async () => {
+        let fail = false
+        for (let x of ['u-pass', 'u-email', 'u-phone', 'u-name']) {
+            $('#' + x).removeClass('is-invalid')
+            if (document.getElementById(x).value.length < 1) {
+                $('#' + x).addClass('is-invalid')
+                fail = true
+            }
+        }
+        if (fail) {
+            console.log("failed")
+            return
+        }
+        let email = document.getElementById('u-email').value
+        let password = document.getElementById('u-pass').value
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(async () => {
+            console.log("registed")
+            await firebase.auth().currentUser.updateProfile({
+                displayName: document.getElementById('u-name').value,
+            }).catch((er) => {
+                console.log(er)
+            })
+            $('#u-alert').addClass('alert-success')
+            $('#u-alert').removeClass('alert-danger')
+            document.getElementById('u-reg-response-1').innerHTML = "Well done " + document.getElementById('u-name').value + " !";
+            document.getElementById('u-reg-response-2').innerHTML = "Your registration was done successfully !";
+            document.getElementById('u-nav').style.display = "block";
+            document.getElementById('u-button').style.display = "none";
+            nextCard()
+        })
+        .catch(async (err) => {
+            console.log(err)
+            
+            if (err.code == "auth/email-already-in-use") {
+                document.getElementById('u-reg-response-1').innerHTML = "Error !";
+                document.getElementById('u-reg-response-2').innerHTML = "Email is already registered";
+                $('#u-email').addClass('is-invalid')
+                $('#u-alert').addClass('alert-danger')
+                $('#u-alert').removeClass('alert-success')
+                document.getElementById('u-button').style.display = "block";
+                document.getElementById('u-nav').style.display = "none";
+            } else if (err.code == "auth/invalid-email") {
+                document.getElementById('u-reg-response-1').innerHTML = "Error !";
+                document.getElementById('u-reg-response-2').innerHTML = "Email Incorrectly formatted";
+                $('#u-email').addClass('is-invalid')
+                $('#u-alert').addClass('alert-danger')
+                $('#u-alert').removeClass('alert-success')
+                document.getElementById('u-button').style.display = "block";
+                document.getElementById('u-nav').style.display = "none";
+            } else {
+                document.getElementById('u-reg-response-1').innerHTML = "Error !";
+                document.getElementById('u-reg-response-2').innerHTML = "Unexpected Error occured: " + err.code;
+                $('#u-alert').addClass('alert-danger')
+                $('#u-alert').removeClass('alert-success')
+                document.getElementById('u-button').style.display = "block";
+                document.getElementById('u-nav').style.display = "none";
+            }
+            
+            nextCard()
+        })
+
+        return false;
+    })
+});
+
+
+</script>
+
+</html>
